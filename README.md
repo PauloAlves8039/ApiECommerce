@@ -8,7 +8,7 @@
 
 ## :computer: Projeto
 
-Repositório com uma WebAPI para simular um eCommerce básico.
+Repositório com uma WebAPI para simular um `eCommerce` básico, o código fonte do projeto foi baseado no curso [.NET MAUI Essencial](https://www.udemy.com/course/net-maui-essencial/).
 
 ## ✔️ Recursos Utilizados
 
