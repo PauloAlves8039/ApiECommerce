@@ -63,7 +63,7 @@ public class UsuariosController : ControllerBase
             issuer: _config["JWT:Issuer"],
             audience: _config["JWT:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddDays(30),
+            expires: DateTime.Now.AddHours(2),
             signingCredentials: credentials);
 
         var jwt = new JwtSecurityTokenHandler().WriteToken(token);

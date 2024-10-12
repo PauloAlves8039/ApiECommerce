@@ -7,7 +7,7 @@ public class Usuario
 {
     public int Id { get; set; }
 
-    [Required]
+    // [Required]
     [StringLength(100)]
     public string? Nome { get; set; }
     
