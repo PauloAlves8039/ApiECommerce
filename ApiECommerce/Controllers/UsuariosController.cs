@@ -51,29 +51,30 @@ public class UsuariosController : ControllerBase
             return NotFound("Usuário não encontrado");
         }
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]!));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.Email , usuario.Email)
+            new Claim(ClaimTypes.Email , usuario.Email!)
         };
 
         var token = new JwtSecurityToken(
             issuer: _config["JWT:Issuer"],
             audience: _config["JWT:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(2),
+            expires: DateTime.Now.AddDays(1),
             signingCredentials: credentials);
 
         var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
         return new ObjectResult(new
         {
-            access_token = jwt,
-            token_type = "bearer",
-            user_id = usuarioAtual.Id,
-            user_name = usuarioAtual.Nome
+            accesstoken = jwt,
+            expiration = token.ValidTo,
+            tokentype = "bearer",
+            usuarioid = usuarioAtual.Id,
+            usuarionome = usuarioAtual.Nome
         });
     }
 
